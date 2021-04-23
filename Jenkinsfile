@@ -6,14 +6,14 @@ pipeline {
         stage('Compile') {
             steps {
                 echo "Compiling..."
-                sh "/usr/local/bin/sbt compile"
+                 sh "${tool name: 'sbt', type:'org.jvnet.hudson.plugins.SbtPluginBuilder$SbtInstallation'}/bin/sbt compile"
             }
         }
 
         stage('Test') {
             steps {
                 echo "Testing..."
-                sh "/usr/local/bin/sbt test"
+                 sh "${tool name: 'sbt', type: 'org.jvnet.hudson.plugins.SbtPluginBuilder$SbtInstallation'}/bin/sbt test"
             }
         }
    }
