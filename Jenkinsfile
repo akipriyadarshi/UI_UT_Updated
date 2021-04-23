@@ -1,21 +1,22 @@
 pipeline {
-    agent any
-
+    agent {
+        docker {
+            image 'hseeberger/scala-sbt'
+        }
+    }
     stages {
-
         stage('Compile') {
             steps {
                 echo "Compiling..."
-                 sh "${tool name: 'sbt', type:'org.jvnet.hudson.plugins.SbtPluginBuilder$SbtInstallation'}/bin/sbt compile"
+                sh "sbt compile"
             }
         }
-
         stage('Test') {
             steps {
-                echo "Testing..."
-                 sh "${tool name: 'sbt', type: 'org.jvnet.hudson.plugins.SbtPluginBuilder$SbtInstallation'}/bin/sbt test"
+                echo 'Building..'
+                sh "sbt test"
             }
         }
-   }
+    } 
 }
 
